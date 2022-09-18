@@ -402,6 +402,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#collapsible-blocks" class="md-nav__link">
+    Collapsible blocks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#output" class="md-nav__link">
     Output
   </a>
@@ -419,6 +426,13 @@
           <li class="md-nav__item">
   <a href="#block-level-syntax" class="md-nav__link">
     Block-level syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collapsible-block-syntax" class="md-nav__link">
+    Collapsible block syntax
   </a>
   
 </li>
@@ -501,7 +515,7 @@
 
 
 <h1 id="markdown-callouts">markdown-callouts<a class="headerlink" href="#markdown-callouts" title="Permanent link">#</a></h1>
-<p><strong>Extension for <a href="https://python-markdown.github.io/">Python-Markdown</a>: a classier syntax for <a href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/#usage">admonitions</a></strong></p>
+<p><strong>Extension for <a href="https://python-markdown.github.io/">Python-Markdown</a>: a classier syntax for <a href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/#usage">admonitions</a> and <a href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/#collapsible-blocks">collapsible blocks</a></strong></p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h2>
 <div class="highlight"><pre><span></span><code>pip install markdown-callouts
 </code></pre></div>
@@ -593,7 +607,9 @@ Rather than this (with the "admonition" extension):
 </td></tr>
 </table>
 <p>The linebreak after the title is optional. And it can be an actual linebreak with two spaces at the end of the line as well -- that has no effect on the output, but again can be relevant for <a href="#project-goals">graceful degradation</a>.</p>
-<p>Note that the period at the end of the sentence is always dropped from the final title. You are encouraged to write those periods anyway, because when using a "vanilla" renderer, the output will look weird.</p>
+<details class="note">
+<summary>About the period at the end of the sentence</summary>
+<p>The period at the end of the sentence is always dropped from the final title. You are encouraged to write those periods anyway, because when using a "vanilla" renderer, the output will look weird.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Markdown</label><label for="__tabbed_1_2">Intended result</label><label for="__tabbed_1_3">Result with vanilla Markdown</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -613,15 +629,62 @@ NOTE: <span class="gs">**A few more thoughts.**</span> Lorem ipsum dolor sit ame
 </div>
 </div>
 <div class="tabbed-block">
-<p>NOTE:  <strong>A few more thoughts</strong>  Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-<p>NOTE:  <strong>A few more thoughts.</strong>  Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<div class="admonition note">
+<p class="admonition-title">A few more thoughts</p>
+<p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">A few more thoughts</p>
+<p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</div>
 </div>
 </div>
 </div>
 <p>If you want to keep the period in the title, you can escape it with a backslash.
 And to <em>always</em> keep periods in the titles, configure the extension with <code>strip_period: false</code>.</p>
+</details>
+<h3 id="collapsible-blocks">Collapsible blocks<a class="headerlink" href="#collapsible-blocks" title="Permanent link">#</a></h3>
+<p>(See first: <a href="#block-level-syntax">Block-level syntax</a>)</p>
+<p>To get the following collapsed <code>&lt;details&gt;</code> block, just add a question mark right after the blockquote symbol:</p>
+<details class="tip">
+<summary>Click me to read more</summary>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod nulla.</p>
+<p>Curabitur feugiat, tortor non consequat finibus, justo purus auctor massa, nec
+semper lorem quam in massa.</p>
+</details>
+<table>
+<tr><td>
+Write this Markdown with the "callouts" extension:
+</td><td>
+
+<div class="highlight"><pre><span></span><code>&gt;? TIP: <span class="gs">**Click me to read more.**</span>
+<span class="k">&gt;</span>
+<span class="ge">&gt; Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod nulla.</span>
+<span class="k">&gt;</span>
+<span class="ge">&gt; Curabitur feugiat, tortor non consequat finibus, justo purus auctor massa, nec</span>
+<span class="k">&gt; </span><span class="ge">semper lorem quam in massa.</span>
+</code></pre></div>
+
+</td></tr>
+<tr><td>
+Rather than this (with the "details" extension):
+</td><td>
+
+<div class="highlight"><pre><span></span><code>??? tip &quot;Click me to read more&quot;
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod nulla.
+
+    Curabitur feugiat, tortor non consequat finibus, justo purus auctor massa, nec
+    semper lorem quam in massa.
+</code></pre></div>
+
+</td></tr>
+</table>
+<p>The block can alternatively be initially open. Just write <code>&gt;!</code> instead of <code>&gt;?</code>.</p>
 <h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
-<p>The produced HTML is the same with both extensions:</p>
+<p>The produced HTML is the same with <a href="https://python-markdown.github.io/extensions/admonition/">both</a> <a href="https://facelessuser.github.io/pymdown-extensions/extensions/details/">extensions</a> that this replaces:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Same as 'admonition'</label><label for="__tabbed_2_2">Same as 'details'</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;admonition note&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;admonition-title&quot;</span><span class="p">&gt;</span>Note<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
@@ -629,11 +692,23 @@ nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
 massa, nec semper lorem quam in massa.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>You may notice that the HTML contains no explicit styling whatsoever. That is because that's supposed to be handled through CSS that accompanies it. In case of MkDocs, that's handled by themes -- if they choose to support styling for the classes <code>.admonition</code>, <code>.admonition-title</code>, etc.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">details</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;note&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">summary</span><span class="p">&gt;</span>Note<span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+massa, nec semper lorem quam in massa.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">details</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>You may notice that the HTML contains no explicit styling whatsoever. That is because that's supposed to be handled through CSS that accompanies it. In case of MkDocs, that's handled by themes -- if they choose to support styling for the classes <code>.admonition</code>, <code>.admonition-title</code> or the tags <code>details</code>, <code>summary</code>.</p>
 <p>In addition to the always-present class <code>admonition</code>, another CSS class will be added that is equal to the title of the "callout", in lowercase. The stylesheet can then choose to specially distinguish the style for a few select identifiers out of those. (<a href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types">Example theme</a>)</p>
 <h3 id="syntax-details">Syntax details<a class="headerlink" href="#syntax-details" title="Permanent link">#</a></h3>
 <p>At the start of a block, there needs to be a word in all English capital letters, followed by a colon, space, then other text.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Markdown</label><label for="__tabbed_2_2">Result</label><label for="__tabbed_2_3">HTML</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Markdown</label><label for="__tabbed_3_2">Result</label><label for="__tabbed_3_3">HTML</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>Previous block will not be picked up.
@@ -672,7 +747,7 @@ is all part of a single
 <p>The space after the colon can instead be a newline as well.</p>
 <h4 id="block-level-syntax">Block-level syntax<a class="headerlink" href="#block-level-syntax" title="Permanent link">#</a></h4>
 <p>To allow putting multiple paragraphs into the same callout and enable all of Markdown features, use the block-level syntax, which works the same as a <a href="https://daringfireball.net/projects/markdown/syntax#blockquote">blockquote</a>, but with the mandatory all-caps word at the beginning of it:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Markdown</label><label for="__tabbed_3_2">Result</label><label for="__tabbed_3_3">HTML</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Markdown</label><label for="__tabbed_4_2">Result</label><label for="__tabbed_4_3">HTML</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">&gt; </span><span class="ge">EXAMPLE: Hello world!</span>
@@ -716,7 +791,7 @@ Next block will not be picked up.
 <p>However... if you'll also be viewing the same Markdown through a renderer that doesn't support this special syntax, it will indeed be a blockquote -- that is also <a href="#project-goals">graceful degradation</a>.</p>
 <details>
 <summary>Compare this to the <a href="https://python-markdown.github.io/extensions/admonition/">Admonition</a> extension</summary>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Markdown</label><label for="__tabbed_4_2">Result without extensions</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Markdown</label><label for="__tabbed_5_2">Result without extensions</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>!!! example
@@ -744,6 +819,54 @@ Still going...
 </div>
 </details>
 <p>You can find more examples (particularly how edge cases are handled) in the <a href="https://github.com/oprypin/markdown-callouts/tree/master/tests/extension">test cases directory</a>.</p>
+<h4 id="collapsible-block-syntax">Collapsible block syntax<a class="headerlink" href="#collapsible-block-syntax" title="Permanent link">#</a></h4>
+<p>Collapsible block syntax is a simple extension of the block syntax.<br />
+Instead of opening the blockquote with <code>&gt;</code>:</p>
+<ul>
+<li>write <code>&gt;?</code> to get a <code>&lt;details&gt;</code> tag;</li>
+<li>write <code>&gt;!</code> to get a <code>&lt;details open&gt;</code> tag.</li>
+</ul>
+<p>To allow putting multiple paragraphs into the same callout and enable all of Markdown features, use the block-level syntax, which works the same as a <a href="https://daringfireball.net/projects/markdown/syntax#blockquote">blockquote</a>, but with the mandatory all-caps word at the beginning of it:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:3"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Markdown</label><label for="__tabbed_6_2">Result</label><label for="__tabbed_6_3">HTML</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>&gt;? EXAMPLE: Hello world!
+<span class="k">&gt;</span>
+<span class="ge">&gt; * Item 1</span>
+<span class="k">&gt; </span><span class="ge">* Item 2</span>
+<span class="k">&gt;</span>
+<span class="ge">&gt; Still going...</span>
+
+Next block will not be picked up.
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<details class="example">
+<summary>Example</summary>
+<p>Hello world!</p>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+</ul>
+<p>Still going...</p>
+</details>
+<p>Next block will not be picked up.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">details</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;example&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">summary</span><span class="p">&gt;</span>Example<span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello world!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Item 1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Item 2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Still going...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">details</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>You can find more examples (particularly how edge cases are handled) in the <a href="https://github.com/oprypin/markdown-callouts/tree/master/tests/details">test cases directory</a>.</p>
 <h4 id="custom-titles_1">Custom titles<a class="headerlink" href="#custom-titles_1" title="Permanent link">#</a></h4>
 <p>A callout block with a custom title is just an extension of the base syntax, where after the capital word and a colon, the first item of the main body must be in bold. This <code>**strong emphasis**</code> syntax (or also with <code>__</code>) is directly used as the delimitation for the title, according to normal rules of how Markdown handles it. The actual <code>&lt;strong&gt;</code> tag will be excluded from the output and its contents will be moved from the paragraph and become the title instead. You can use any inline Markdown formatting within that main delimiter, and <em>that</em> will be preserved. Single newlines are allowed within the delimited title part, again as per normal Markdown rules.</p>
 <p>You can find more examples (particularly how edge cases are handled) in the <a href="https://github.com/oprypin/markdown-callouts/tree/master/tests/extension/title">test cases directory</a>.</p>
@@ -753,7 +876,7 @@ Still going...
 <div class="highlight"><pre><span></span><code> EXAMPLE: Hi.
 </code></pre></div>
 <p>And if you happen to need to start your callout with a sentence in bold (without picking it up as the title), make sure to put a newline first:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Markdown</label><label for="__tabbed_5_2">Result</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Markdown</label><label for="__tabbed_7_2">Result</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>NOTE: <span class="gs">**This is a title.**</span> Body.
